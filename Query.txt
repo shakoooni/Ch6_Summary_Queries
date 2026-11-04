@@ -1,4 +1,4 @@
-/***********************************************
+z/***********************************************
 Date : 2026.11.04
 Name : Jay Meesala
 Chapter 6 Assignment
@@ -6,19 +6,15 @@ GitHub: https://github.com/shakoooni/Ch6_Summary_Queries
 ************************************************/
 /***********************************************
 Query 1: COUNT
-Write a query that returns the total number of
-rentals and the total returned.
-Written by: Jay Meesala
+Write a query that returns the total number of rentals and the total returned.
 ************************************************/
 SELECT COUNT(*) AS total_rentals,
     COUNT(return_date) AS total_returned
 FROM rental;
 /***********************************************
 Query 2: COUNT(DISTINCT column)
-Write a query that returns the number of unique
-customers who made payments and the total number
-of payments.
+Write a query that returns the total number of unique customers payments and the total number of payments.
 ************************************************/
 SELECT COUNT(DISTINCT customer_id) AS unique_customers,
-    COUNT(*) AS total_num_of_payments
+    COUNT(*) AS total_num_of_payment
 FROM payment;
