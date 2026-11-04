@@ -108,5 +108,24 @@ FROM payment p
         ON a.city_id = ci.city_id
 GROUP BY a.district, ci.city WITH ROLLUP;
 
+/***********************************************
+Query 8: GROUPING and COALESCE functions
+************************************************/
+SELECT COALESCE(a.district, 'District Sum') AS district,
+    COALESCE(ci.city, 'City Sum') AS city,
+    COUNT(*) AS number_of_payment,
+    MIN(p.amount) AS min_payment,
+    MAX(p.amount) AS max_payment,
+    ROUND(AVG(p.amount), 2) AS avg_payment,
+    SUM(p.amount) AS total_amount_paid
+FROM payment p
+    JOIN customer c
+        ON p.customer_id = c.customer_id
+    JOIN address a
+        ON c.address_id = a.address_id
+    JOIN city ci
+        ON a.city_id = ci.city_id
+GROUP BY a.district, ci.city WITH ROLLUP;
+
 
 
