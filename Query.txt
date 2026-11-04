@@ -46,3 +46,22 @@ FROM payment p JOIN customer c
     ON p.customer_id = c.customer_id
 GROUP BY p.customer_id
 HAVING SUM(p.amount) > 100;
+
+/***********************************************
+
+Query 5: WHERE vs HAVING - Part 1
+Rewrite query 4 to only display store id = 1 and total amount > 100
+IMPORTANT NOTE: store_id is NOT in the column list so you can NOT put it in the HAVING clause
+************************************************/
+SELECT p.customer_id,
+    CONCAT(c.last_name, ', ', c.first_name) AS customer_name,
+    COUNT(*) AS number_of_payment,
+    MIN(p.amount) AS min_payment,
+    MAX(p.amount) AS max_payment,
+    ROUND(AVG(p.amount), 2) AS avg_payment,
+    SUM(p.amount) AS total_amount_paid
+FROM payment p JOIN customer c
+    ON p.customer_id = c.customer_id
+WHERE c.store_id = 1
+GROUP BY p.customer_id
+HAVING SUM(p.amount) > 100;
