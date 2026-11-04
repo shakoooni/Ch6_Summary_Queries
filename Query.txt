@@ -13,3 +13,12 @@ Written by: Jay Meesala
 SELECT COUNT(*) AS total_rentals,
     COUNT(return_date) AS total_returned
 FROM rental;
+/***********************************************
+Query 2: COUNT(DISTINCT column)
+Write a query that returns the number of unique
+customers who made payments and the total number
+of payments.
+************************************************/
+SELECT COUNT(DISTINCT customer_id) AS unique_customers,
+    COUNT(*) AS total_num_of_payments
+FROM payment;
