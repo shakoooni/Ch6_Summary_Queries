@@ -84,4 +84,29 @@ GROUP BY p.customer_id
 HAVING c.store_id = 1
     AND SUM(p.amount) > 100;
 
+/***********************************************
+Query 7: WITH ROLLUP
+Rewrite query 6 to no longer summarize at the customer level. 
+Instead, it will summarize at the district and city, plus include WITH ROLLUP summary rows.
+Also, do not filter any of the data using a HAVING clause.
+Note: The image displays the result set scrolled down to the bottom 
+because I want you to see the grand total row at the bottom.
+************************************************/
+SELECT a.district,
+    ci.city,
+    COUNT(*) AS number_of_payment,
+    MIN(p.amount) AS min_payment,
+    MAX(p.amount) AS max_payment,
+    ROUND(AVG(p.amount), 2) AS avg_payment,
+    SUM(p.amount) AS total_amount_paid
+FROM payment p
+    JOIN customer c
+        ON p.customer_id = c.customer_id
+    JOIN address a
+        ON c.address_id = a.address_id
+    JOIN city ci
+        ON a.city_id = ci.city_id
+GROUP BY a.district, ci.city WITH ROLLUP;
+
+
 
